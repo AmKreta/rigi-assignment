@@ -16,7 +16,7 @@ function App() {
   useEffect(function(){
    dispatch(fetchUsers() as any);
    dispatch(fetchPosts() as any);
-  },[]);
+  },[dispatch]);
 
   return (
     <ThemeContext.Provider value={{mode:ActiveTheme, changeMode:setActiveTheme}}>

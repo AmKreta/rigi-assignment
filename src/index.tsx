@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./store/store";
 import router from './routes/routes';

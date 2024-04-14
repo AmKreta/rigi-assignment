@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { PostApiService } from "../../services/post.api.service";
 import { Post } from "../../lib/types/types";
 
-interface PostSlice {
+interface PostSliceInterface {
   activePost: Post | null;
   list: {
     loading: boolean;
@@ -16,7 +16,7 @@ interface PostSlice {
   };
 }
 
-const initialState: PostSlice = {
+const initialState: PostSliceInterface = {
   activePost: null,
   list: {
     loading: false,

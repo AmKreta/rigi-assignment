@@ -17,7 +17,7 @@ const Post: React.FC<props> = function ({ post, isLoading, onClick, index }) {
   return (
     <div className={`${mode} post-container`}>
       <div className="author-profile-picture">
-        <img src={post.author.profilePictureUrl} loading="lazy"/>
+        <img src={post.author.profilePictureUrl} loading="lazy" alt='user dp'/>
       </div>
       <div className="post-main">
         <div className="post-header">
@@ -38,7 +38,7 @@ const Post: React.FC<props> = function ({ post, isLoading, onClick, index }) {
                             .map((attachment, index)=><div key={attachment.id} className={`post-attachment post-attachment-${index}`}>
                                 {
                                     attachment.type===AttachmentType.IMAGE
-                                        ? <img src={attachment.url} loading="lazy"/>
+                                        ? <img src={attachment.url} loading="lazy" alt='post-attachment'/>
                                         : <video src={attachment.url} controls preload="metadata"/>
                                 }
                             </div>)

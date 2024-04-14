@@ -13,7 +13,7 @@ const FriendListComponent:React.FC = ()=>{
         <div className='friend-list-title'>Members</div>
         {
             friends.map(friend=><div key={friend.id} className='friend-list-item'>
-                <img src={friend.profilePictureUrl} loading='lazy' />
+                <img src={friend.profilePictureUrl} loading='lazy' alt='user-dp'/>
                 <div>{friend.name}</div>
             </div>)
         }

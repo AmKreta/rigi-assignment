@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { UserApiService } from "../../services/user.api.service";
 import { User } from "../../lib/types/types";
 
-interface UserSlice{
+interface UserSliceInterface{
     loading:boolean;
     error:null | {message:string};
     data:User[]
 };
 
-const initialState:UserSlice = {
+const initialState:UserSliceInterface = {
     loading:false,
     error:null,
     data:[]

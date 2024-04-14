@@ -18,7 +18,7 @@ const DetailedPost: React.FC = function () {
     return ()=>{
       dispatch(resetActivePost())
      };
-  },[]);
+  },[dispatch]);
 
   if(!post){
     const timer = setTimeout(function(){
