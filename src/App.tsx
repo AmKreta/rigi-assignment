@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.scss';
-import Feed from './page/feed/feed.component';
 import { fetchUsers } from './store/users/users.store';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from './store/posts/posts';
 import { ThemeMode } from './lib/enum/theme.enum';
 import ThemeContext from './lib/context/themeProvider';
+import Appbar from './components/appbar/appbar.component';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [ActiveTheme, setActiveTheme] = useState<ThemeMode>(ThemeMode.SYSTEM);
@@ -19,7 +20,8 @@ function App() {
 
   return (
     <ThemeContext.Provider value={{mode:ActiveTheme, changeMode:setActiveTheme}}>
-      <Feed />
+      <Appbar />
+      <Outlet />
     </ThemeContext.Provider>
   );
 }
