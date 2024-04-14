@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Feed from "../page/feed/feed.component";
-import Post from "../page/post/post.component";
+import DetailedPost from "../page/post/detailedPost.component";
 import App from "../App";
 import NotFound from "../page/not-found/not-found.component";
 
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/:id",
-        element: <Post />,
+        element: <DetailedPost />,
       },
     ],
   },
