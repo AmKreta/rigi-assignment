@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useLayoutEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Post  from "../../components/post/post.component";
@@ -13,6 +13,17 @@ const Feed: React.FC = function () {
   const posts = useSelector((state:RootState)=>state.post.list);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(function(){
+    const scrollPosition = localStorage.getItem('feed-scroll-position');
+    if(scrollPosition){
+      ref.current?.scrollTo({top:Number(scrollPosition)})
+    }
+    return ()=>{
+      localStorage.setItem('feed-scroll-position', `${ref.current!.scrollTop}`);
+    }
+  },[]);
 
   if(posts.loading){
     return <div>loading</div>
@@ -33,7 +44,7 @@ const Feed: React.FC = function () {
     navigate(`/${id}`);
   }
 
-  return <div className={`${mode} feed-container`}>
+  return <div className={`${mode} feed-container`} ref={ref}>
         {posts.data.map((post:any, index:number)=><Post post={post} key={post.id} onClick={navigaeToPost} index={index}/>)}
         <FriendListComponent />
     </div>
