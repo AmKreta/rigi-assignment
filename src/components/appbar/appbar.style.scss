@@ -3,5 +3,8 @@
     background-color: var(--bg1);
     box-shadow: 0 0 5px 1px var(--bg3);
     position: sticky;
-    top:0
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

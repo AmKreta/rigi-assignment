@@ -1,0 +1,17 @@
+.input-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--text1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding:0 4px;
+}
+
+.input{
+    flex-grow: 1;
+    padding:4px 0;
+    border:none;
+    outline:none;
+    margin-left:4px;
+}
