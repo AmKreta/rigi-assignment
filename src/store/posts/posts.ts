@@ -1,13 +1,9 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { PostApiService } from "../../services/post.api.service";
 import { Post } from "../../lib/types/types";
 
 interface PostSlice {
-  activePost: {
-    loading: boolean;
-    error: null | { message: string };
-    data: any;
-  };
+  activePost: Post | null;
   list: {
     loading: boolean;
     error: null | { message: string };
@@ -21,7 +17,7 @@ interface PostSlice {
 }
 
 const initialState: PostSlice = {
-  activePost: { loading: false, error: null, data: {} },
+  activePost: null,
   list: {
     loading: false,
     error: null,
@@ -50,6 +46,12 @@ const PostSlice = createSlice({
   name: "Posts",
   initialState,
   reducers: {
+    setActivePost(state, action:PayloadAction<Post>){
+      state.activePost = action.payload;
+    },
+    resetActivePost(state){
+      state.activePost = null;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPosts.pending, (state) => {
@@ -68,21 +70,8 @@ const PostSlice = createSlice({
         message: action.error.message!,
       };
     });
-
-    builder.addCase(fetchPostById.pending, (state) => {
-      state.activePost.loading = true;
-    });
-    builder.addCase(fetchPostById.fulfilled, (state, action) => {
-      state.activePost.loading = false;
-      state.activePost.data = action.payload;
-    });
-    builder.addCase(fetchPostById.rejected, (state, action) => {
-      state.activePost.loading = false;
-      state.activePost.error = {
-        message: action.error.message!,
-      };
-    });
   },
 });
 
+export const {setActivePost, resetActivePost} = PostSlice.actions;
 export default PostSlice.reducer;
