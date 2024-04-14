@@ -1,0 +1,40 @@
+.friend-list-container{
+    height:100%;
+    width:300px;
+    position:fixed;
+    right:0;
+    top:67px;
+    padding:16px;
+    height: calc(100% - 67px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.friend-list-item{
+    display: flex;
+    align-items: center;
+    gap:8px;
+    color:var(--text1);
+    margin:16px 0;
+
+    >img{
+        height:30px;
+        width:30px;
+        border-radius: 50%;
+    }
+
+    >div{
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: left;
+    }
+}
+
+
+.friend-list-title{
+    color:var(--text2);
+    position: sticky;
+    top:0;
+}
