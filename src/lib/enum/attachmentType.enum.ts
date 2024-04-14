@@ -1,4 +1,4 @@
 export enum AttachmentType{
-    IMAHE='image',
+    IMAGE='image',
     VIDEO='video'
 };
