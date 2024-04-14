@@ -3,10 +3,10 @@ import { axiosInstance } from "./axiosInstance";
 
 export namespace PostApiService{
 
-    export function getPosts(){
+    export function getPosts(page:number, limit:number){
         return axiosInstance({
             method: RequestMethod.GET,
-            url:'posts',
+            url:`posts?limit=${limit}&page=${page}`,
         });
     }
 
