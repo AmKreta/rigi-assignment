@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import './App.css';
+import './App.scss';
 import Feed from './page/feed/feed.component';
 import { fetchUsers } from './store/users/users.store';
 import { useDispatch } from 'react-redux';
 import { fetchPosts } from './store/posts/posts';
-import { ThemeMode } from '@lib/enum/theme.enum';
-import ThemeContext from '@lib/context/themeProvider';
+import { ThemeMode } from './lib/enum/theme.enum';
+import ThemeContext from './lib/context/themeProvider';
 
 function App() {
   const [ActiveTheme, setActiveTheme] = useState<ThemeMode>(ThemeMode.SYSTEM);
