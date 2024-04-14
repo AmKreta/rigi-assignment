@@ -1,3 +1,5 @@
+import { AttachmentType } from "../enum/attachmentType.enum";
+
 export interface User{
     id:number;
     name:string;
@@ -7,7 +9,7 @@ export interface User{
 export interface Attachment {
     id: number;
     url: string;
-    type: "image" | "video";
+    type: AttachmentType;
 }
   
 export interface Author {
