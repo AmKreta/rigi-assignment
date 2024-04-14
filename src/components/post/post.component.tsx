@@ -9,12 +9,13 @@ interface props {
   post: PostInterface;
   isLoading?: boolean;
   onClick?:(e:React.MouseEvent<HTMLDivElement>)=>void;
+  index?:number
 }
 
-const Post: React.FC<props> = function ({ post, isLoading, onClick }) {
+const Post: React.FC<props> = function ({ post, isLoading, onClick, index }) {
   const {mode} = useContext(ThemeContext);  
   return (
-    <div className={`${mode} post-container`} onClick={onClick}>
+    <div className={`${mode} post-container`}>
       <div className="author-profile-picture">
         <img src={post.author.profilePictureUrl} loading="lazy"/>
       </div>
@@ -26,7 +27,7 @@ const Post: React.FC<props> = function ({ post, isLoading, onClick }) {
                 <span>{formatDate(post.createdAt as any)}</span>
             </div>
         </div>
-        <div className="post-content">{post.text}</div>
+        <div className="post-content" onClick={onClick} data-id={post.id} data-index={index}>{post.text}</div>
         {
             post.attachments.length
                 ?<div className={`post-attachment-container num-attachment-${post.attachments.length>=3?3:post.attachments.length}`}>
