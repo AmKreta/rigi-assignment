@@ -3,6 +3,7 @@ import { Post as PostInterface } from "../../lib/types/types";
 import "./post.styles.scss";
 import formatDate from "../../lib/dateFormat/dateFormat";
 import ThemeContext from "../../lib/context/themeProvider";
+import { AttachmentType } from "../../lib/enum/attachmentType.enum";
 
 interface props {
   post: PostInterface;
@@ -29,9 +30,16 @@ const Post: React.FC<props> = function ({ post, isLoading }) {
             post.attachments.length
                 ?<div className={`post-attachment-container num-attachment-${post.attachments.length>=3?3:post.attachments.length}`}>
                     {
-                        post.attachments.map(attachment=><div key={attachment.id} className="post-attachment">
-                            
-                        </div>)
+                        post
+                            .attachments
+                            .slice(0,3)
+                            .map((attachment, index)=><div key={attachment.id} className={`post-attachment post-attachment-${index}`}>
+                                {
+                                    attachment.type===AttachmentType.IMAGE
+                                        ? <img src={attachment.url} />
+                                        : <video src={attachment.url} />
+                                }
+                            </div>)
                     }
                 </div>
             :null

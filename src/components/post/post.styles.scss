@@ -3,7 +3,7 @@
     display: flex;
     align-items: flex-start;
     padding:16px;
-    margin: auto;
+    margin: 16px auto;
 }  
 
 .author-profile-picture{
@@ -18,9 +18,9 @@
     }
 }
 
-.main{
+.post-main{
     flex-grow: 1;
-    height:161px;
+    width: 100%;
 }
 
 .post-header{
@@ -55,5 +55,41 @@
 .post-attachment-container{
     width:100%;
     height:110px;
-    background-color: red;
+
+    &.num-attachment-1{
+
+    }
+
+    &.num-attachment-2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.num-attachment-3{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 6px;
+        grid-template-areas: "attachment1 attachment2"
+        "attachment1 attachment3";
+    }
 }
+
+.post-attachment{
+    overflow: hidden;
+
+    img{
+        height:100%;
+        width:100%;
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
+@for $i from 1 through 3 {
+    .post-attachment-#{$i} {
+      grid-area: attachment#{$i};
+    }
+}
+
