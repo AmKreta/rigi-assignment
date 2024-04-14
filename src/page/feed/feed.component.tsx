@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Post  from "../../components/post/post.component";
 import './feed.style.scss';
 import ThemeContext from "../../lib/context/themeProvider";
 import FriendListComponent from "../../components/friend-list/friendList.component";
 import { useNavigate } from "react-router-dom";
+import { setActivePost } from "../../store/posts/posts";
 
 const Feed: React.FC = function () {
   const {mode} = useContext(ThemeContext);
   const posts = useSelector((state:RootState)=>state.post.list);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   if(posts.loading){
     return <div>loading</div>
@@ -26,9 +28,9 @@ const Feed: React.FC = function () {
 
   const navigaeToPost = (e:React.MouseEvent<HTMLDivElement>)=>{
     const id = e.currentTarget.dataset['id'];
-    const index = e.currentTarget.dataset['index'];
-    console.log(id, index);
-    //navigate(`./${id}`);
+    const index = parseInt(e.currentTarget.dataset['index']!);
+    dispatch(setActivePost(posts.data[index]));
+    navigate(`/${id}`);
   }
 
   return <div className={`${mode} feed-container`}>
