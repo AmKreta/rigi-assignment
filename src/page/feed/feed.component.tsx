@@ -5,6 +5,7 @@ import { Post as PostInterface } from "../../lib/types/types";
 import Post  from "../../components/post/post.component";
 import './feed.style.scss';
 import ThemeContext from "../../lib/context/themeProvider";
+import FriendListComponent from "../../components/friend-list/friendList.component";
 
 const Feed: React.FC = function () {
   const {mode} = useContext(ThemeContext);
@@ -14,8 +15,9 @@ const Feed: React.FC = function () {
   }
 
   return <div className={`${mode} feed-container`}>
-    {posts.map(post=><Post post={post} key={post.id} />)}
-  </div>
+        {posts.map(post=><Post post={post} key={post.id} />)}
+        <FriendListComponent />
+    </div>
 };
 
 export default Feed;
