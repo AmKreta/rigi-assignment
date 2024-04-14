@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { PostApiService } from "../../services/post.api.service";
 import { Post } from "../../lib/types/types";
 
-interface UserSlice {
+interface PostSlice {
   activePost: {
     loading: boolean;
     error: null | { message: string };
@@ -20,7 +20,7 @@ interface UserSlice {
   };
 }
 
-const initialState: UserSlice = {
+const initialState: PostSlice = {
   activePost: { loading: false, error: null, data: {} },
   list: {
     loading: false,
