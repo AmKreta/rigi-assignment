@@ -1,6 +1,7 @@
 import { Tuple, combineReducers, configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import usersStore from './users/users.store';
+import users from './users/users.store';
+import post from './posts/posts';
 import { GetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 
 export const store = configureStore({
@@ -12,7 +13,8 @@ export const store = configureStore({
         return new Tuple(...middlewareList);
     },
     reducer: combineReducers({
-        usersStore
+        users,
+        post
     }),
     devTools:true
 })
