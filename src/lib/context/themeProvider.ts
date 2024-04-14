@@ -1,4 +1,4 @@
-import { ThemeMode } from "@lib/enum/theme.enum"
+import { ThemeMode } from "../enum/theme.enum"
 import React from "react"
 
 export interface Theme{
