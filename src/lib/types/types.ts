@@ -3,7 +3,7 @@ import { AttachmentType } from "../enum/attachmentType.enum";
 export interface User{
     id:number;
     name:string;
-    profilePicture:string;
+    profilePictureUrl:string;
 };
 
 export interface Attachment {
