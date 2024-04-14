@@ -57,7 +57,7 @@
     height:110px;
 
     &.num-attachment-1{
-
+        overflow: hidden;
     }
 
     &.num-attachment-2{
@@ -78,12 +78,16 @@
 
 .post-attachment{
     overflow: hidden;
-
+    object-fit: cover;
+    object-position: center center;
     img{
         height:100%;
         width:100%;
-        object-fit: cover;
-        object-position: center center;
+    }
+
+    video{
+        height:100%;
+        width:100%;
     }
 }
 

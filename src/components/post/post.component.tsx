@@ -8,12 +8,13 @@ import { AttachmentType } from "../../lib/enum/attachmentType.enum";
 interface props {
   post: PostInterface;
   isLoading?: boolean;
+  onClick?:(e:React.MouseEvent<HTMLDivElement>)=>void;
 }
 
-const Post: React.FC<props> = function ({ post, isLoading }) {
+const Post: React.FC<props> = function ({ post, isLoading, onClick }) {
   const {mode} = useContext(ThemeContext);  
   return (
-    <div className={`${mode} post-container`}>
+    <div className={`${mode} post-container`} onClick={onClick}>
       <div className="author-profile-picture">
         <img src={post.author.profilePictureUrl} loading="lazy"/>
       </div>
