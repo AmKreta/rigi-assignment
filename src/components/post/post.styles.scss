@@ -1,15 +1,15 @@
 .post-container{
-    width:454px;
+    width:min(100%,454px);
     display: flex;
     align-items: flex-start;
     padding:16px;
-    margin: 16px auto;
+    margin: 24px auto;
 }  
 
 .author-profile-picture{
     height:30px;
     width:30px;
-    margin-right:16px;
+    margin-right:12px;
     img{
         height: 100%;
         width:100%;

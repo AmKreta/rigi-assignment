@@ -36,8 +36,8 @@ const Post: React.FC<props> = function ({ post, isLoading }) {
                             .map((attachment, index)=><div key={attachment.id} className={`post-attachment post-attachment-${index}`}>
                                 {
                                     attachment.type===AttachmentType.IMAGE
-                                        ? <img src={attachment.url} />
-                                        : <video src={attachment.url} />
+                                        ? <img src={attachment.url} loading="lazy"/>
+                                        : <video src={attachment.url} controls preload="metadata"/>
                                 }
                             </div>)
                     }
