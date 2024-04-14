@@ -1,0 +1,66 @@
+:root {
+    --light-bg1: #ffffff;
+    --light-bg2: #f0f0f0;
+    --light-bg3: #e0e0e0;
+    --light-text1: #333333;
+    --light-text2: #666666;
+    --light-text3: #999999;
+    --light-border1: #cccccc;
+    --light-border2: #dddddd;
+    --light-border3: #eeeeee;
+
+    --dark-bg1: #222222;
+    --dark-bg2: #333333;
+    --dark-bg3: #444444;
+    --dark-text1: #ffffff;
+    --dark-text2: #dddddd;
+    --dark-text3: #bbbbbb;
+    --dark-border1: #666666;
+    --dark-border2: #555555;
+    --dark-border3: #444444;
+}
+
+@mixin lightTheme(){
+    --bg1: var(--light-bg1);
+    --bg2: var(--light-bg2);
+    --bg3: var(--light-bg3);
+    --text1: var(--light-text1);
+    --text2: var(--light-text2);
+    --text3: var(--light-text3);
+    --border1: var(--light-border1);
+    --border2: var(--light-border2);
+    --border3: var(--light-border3);
+}
+
+@mixin darkTheme(){
+    --bg1: var(--dark-bg1);
+    --bg2: var(--dark-bg2);
+    --bg3: var(--dark-bg3);
+    --text1: var(--dark-text1);
+    --text2: var(--dark-text2);
+    --text3: var(--dark-text3);
+    --border1: var(--dark-border1);
+    --border2: var(--dark-border2);
+    --border3: var(--dark-border3);
+}
+
+.light {
+   @include lightTheme();
+}
+
+.dark {
+  @include darkTheme();
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .system {
+        @include darkTheme();
+    }
+  }
+  
+  @media (prefers-color-scheme: light) {
+    .system {
+        @include lightTheme();
+    }
+  }
