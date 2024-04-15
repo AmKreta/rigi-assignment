@@ -55,7 +55,14 @@ self.addEventListener('fetch', (event) => {
         return err;
     })
   }
-  else if(request.url.match(/\.(png|jpg|jpeg|gif|webp|svg|mp4|webm)$/)) {
+  else if(
+    ['png','jpg','jpeg','gif','webp','svg','mp4','webm'].some(extension=>request.url.endsWith(extension))
+    || ['githubusercontent','picsum'].some(word=>request.url.includes(word))
+  ){
+    saveToCache();
+  }
+
+  function saveToCache(){
     event.respondWith(
       caches.match(request)
         .then((response) => {
@@ -64,7 +71,7 @@ self.addEventListener('fetch', (event) => {
           }
           const fetchRequest = request.clone();
           return fetch(fetchRequest).then((response) => {
-            if (!response || response.status !== 200 || response.type !== 'basic') {
+            if (!response) {
               return response;
             }
             const responseToCache = response.clone();
