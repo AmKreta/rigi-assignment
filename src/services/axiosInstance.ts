@@ -4,6 +4,6 @@ import { rootApiUrl } from "./rootApiUrl";
 export const axiosInstance = axios.create({
     baseURL: rootApiUrl,
     headers: {
-      'Authorization': ``
+      'Authorization': process.env.REACT_APP_API_KEY
     },
 });
