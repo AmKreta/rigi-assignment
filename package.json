@@ -11,6 +11,7 @@
     "@types/node": "^16.18.96",
     "@types/react": "^18.2.77",
     "@types/react-dom": "^18.2.25",
+    "@types/serviceworker": "^0.0.85",
     "axios": "^1.6.8",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",

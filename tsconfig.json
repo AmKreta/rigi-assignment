@@ -4,7 +4,8 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "WebWorker"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,5 +23,9 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node/*/**",
+    "src/lib/serviceworker"
   ]
 }
