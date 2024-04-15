@@ -17,11 +17,12 @@ const Feed: React.FC = function () {
 
   useLayoutEffect(function(){
     const scrollPosition = localStorage.getItem('feed-scroll-position');
+    const current = ref.current;
     if(scrollPosition){
-      ref.current?.scrollTo({top:Number(scrollPosition)})
+      current?.scrollTo({top:Number(scrollPosition)})
     }
     return ()=>{
-      localStorage.setItem('feed-scroll-position', `${ref.current!.scrollTop}`);
+      localStorage.setItem('feed-scroll-position', `${current!.scrollTop}`);
     }
   },[]);
 
