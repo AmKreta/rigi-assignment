@@ -72,13 +72,17 @@ const Feed: React.FC = function () {
             onClick={navigaeToPost} 
             index={index}
           />)}
-        <IntersectionObserverComponent callback={loadMorePosts} options={{root:document.body}}>
           {
-            (ref)=>(<div ref={ref as any}>
-              <Loader height={40} width={40}/>
-            </div>)
+            posts.pagination
+              ? <IntersectionObserverComponent callback={loadMorePosts} options={{root:document.body}}>
+                  {
+                    (ref)=>(<div ref={ref as any}>
+                      <Loader height={40} width={40}/>
+                    </div>)
+                  }
+                </IntersectionObserverComponent>
+              :null
           }
-        </IntersectionObserverComponent>
         <FriendListComponent />
     </div>
 };
