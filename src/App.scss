@@ -54,12 +54,20 @@
 
 
 @media (prefers-color-scheme: dark) {
+    body{
+        background-color: var( --dark-bg1);
+    }
+
     .system {
         @include darkTheme();
     }
   }
   
   @media (prefers-color-scheme: light) {
+    body{
+        background-color: var( --light-bg1);
+    }
+
     .system {
         @include lightTheme();
     }
