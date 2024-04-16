@@ -8,6 +8,8 @@ import FriendListComponent from "../../components/friend-list/friendList.compone
 import { useNavigate } from "react-router-dom";
 import { setActivePost } from "../../store/posts/posts";
 import { Post as PostInterface } from "../../lib/types/types";
+import Modal from "../../components/modal/modal.component";
+import Loader from "../../components/loader/loader.component";
 
 const Feed: React.FC = function () {
   const {mode} = useContext(ThemeContext);
@@ -29,15 +31,21 @@ const Feed: React.FC = function () {
   },[]);
 
   if(posts.loading){
-    return <div>loading</div>
+    return <Modal>
+      <Loader height={60} width={60}/>
+    </Modal>
   }
 
   if(posts.error){
-    return <div>error in loading posts</div>
+    return <Modal>
+      <div style={{color:'var(--text1)'}}>error in loading posts....refresh again</div>
+    </Modal>
   }
   
   if(!posts.data.length){
-    return <div>no post to show</div>
+    return <Modal>
+      <div style={{color:'var(--text1)'}}>no post to show</div>
+    </Modal>
   }
 
   const navigaeToPost = (e:React.MouseEvent<HTMLDivElement>)=>{
