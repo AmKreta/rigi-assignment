@@ -64,7 +64,19 @@ const PostSlice = createSlice({
     });
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
       state.list.loading = false;
-      if(action.payload){
+      if(!action.payload){
+        return;
+      }
+      if(Array.isArray(action.payload)){
+        state.list.data = [...state.list.data, ...action.payload];
+        if(!action.payload.length){
+          state.list.pagination.hasMore = false;
+        }
+        else{
+          state.list.pagination.page++;
+        }
+      }
+      else{
         state.list.data = [...state.list.data, ...action.payload!.data];
         state.list.pagination = action.payload!.pagination;
       }
