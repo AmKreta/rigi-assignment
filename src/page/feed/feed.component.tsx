@@ -45,13 +45,13 @@ const Feed: React.FC = function () {
 
   if(posts.error){
     return <Modal>
-      <div style={{color:'var(--text1)'}}>error in loading posts....refresh again</div>
+      <div className={`${mode}`} style={{color:'var(--text1)'}}>error in loading posts....refresh again</div>
     </Modal>
   }
   
   if(!posts.data.length){
     return <Modal>
-      <div style={{color:'var(--text1)'}}>no post to show</div>
+      <div className={`${mode}`} style={{color:'var(--text1)'}}>no post to show</div>
     </Modal>
   }
 
