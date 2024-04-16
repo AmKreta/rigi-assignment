@@ -46,11 +46,16 @@ async function appFiles(event){
     event.respondWith(
       fetch(fetchRequest)
         .then(async response=>{
-          if(response.url.includes(self.location.origin)){
+          if(
+            (fetchRequest.url === self.location.origin+'/')
+            || (!fetchRequest.url.startsWith('chrome-extension://') && fetchRequest.url.includes(self.location.origin) && fetchRequest.url.startsWith('.js'))
+          ){
             const responseToCache = response.clone();
             caches
               .open(STATIC_CACHE)
-              .then(cache=>cache.add(fetchRequest, responseToCache))
+              .then(cache=>{
+                cache.add(fetchRequest, responseToCache)
+              })
               .catch(err=>{
                 console.log(err);
               })
