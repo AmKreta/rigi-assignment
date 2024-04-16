@@ -22,7 +22,7 @@ const Feed: React.FC = function () {
       current?.scrollTo({top:Number(scrollPosition)})
     }
     return ()=>{
-      localStorage.setItem('feed-scroll-position', `${current!.scrollTop}`);
+      localStorage.setItem('feed-scroll-position', `${current?.scrollTop}`);
     }
   },[]);
 
