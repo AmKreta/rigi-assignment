@@ -10,7 +10,6 @@ import { fetchPosts, setActivePost } from "../../store/posts/posts";
 import { Post as PostInterface } from "../../lib/types/types";
 import Modal from "../../components/modal/modal.component";
 import Loader from "../../components/loader/loader.component";
-import useIntersectionObserver from "../../lib/hooks/useIntersectionObserver.hook";
 import IntersectionObserverComponent from "../../lib/intrsectionObserverComponent/intersectionObserver.component";
 
 const Feed: React.FC = function () {

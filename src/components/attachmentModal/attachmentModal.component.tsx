@@ -35,7 +35,7 @@ const AttachmentModal:React.FC<props> = ({attachments, onOverlayClick})=>{
             <div className='attachment-modal-media-container'>
                 {
                     attachments[currentIndex].type===AttachmentType.IMAGE
-                        ?<img src={attachments[currentIndex].url} alt='attachment picture'/>
+                        ?<img src={attachments[currentIndex].url} alt='attachment'/>
                         :<video src={attachments[currentIndex].url} controls /> 
                 }
             </div>

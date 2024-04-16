@@ -25,7 +25,7 @@ function App() {
       }
    }
 
-  },[dispatch]);
+  },[dispatch, activeTheme]);
 
   if(activeTheme === ThemeMode.SYSTEM){
     //preventing initial creation of nodes and then changing theme

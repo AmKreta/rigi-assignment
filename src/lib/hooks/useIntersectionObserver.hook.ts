@@ -24,7 +24,7 @@ function useIntersectionObserver(
         return () => {
             observer.current?.disconnect();
         };
-    }, []);
+    }, [callback, options]);
 
     return ref;
 }
