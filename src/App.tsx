@@ -9,17 +9,31 @@ import Appbar from './components/appbar/appbar.component';
 import { Outlet } from 'react-router-dom';
 
 function App() {
-  const [ActiveTheme, setActiveTheme] = useState<ThemeMode>(ThemeMode.SYSTEM);
+  const [activeTheme, setActiveTheme] = useState<ThemeMode>(ThemeMode.SYSTEM);
 
   const dispatch = useDispatch();
 
   useEffect(function(){
    dispatch(fetchUsers() as any);
    dispatch(fetchPosts() as any);
+
+   if(activeTheme === ThemeMode.SYSTEM){
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setActiveTheme(ThemeMode.DARK);
+      } else {
+       setActiveTheme(ThemeMode.LIGHT);
+      }
+   }
+
   },[dispatch]);
 
+  if(activeTheme === ThemeMode.SYSTEM){
+    //preventing initial creation of nodes and then changing theme
+    return null;
+  }
+
   return (
-    <ThemeContext.Provider value={{mode:ActiveTheme, changeMode:setActiveTheme}}>
+    <ThemeContext.Provider value={{mode:activeTheme, changeMode:setActiveTheme}}>
       <Appbar />
       <Outlet />
     </ThemeContext.Provider>
