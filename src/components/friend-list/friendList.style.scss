@@ -38,3 +38,28 @@
     position: sticky;
     top:0;
 }
+
+.hamburger{
+    display: none;
+}
+
+
+@media only screen and (max-width:1100px){
+    .friend-list-container{
+       position:absolute;
+       top:0;
+       height:100%;
+       background-color: var(--bg2);
+       border-left:1px solid var(--border1);
+       box-shadow: -1px 0 3px var(--border3);
+    }
+
+    .hamburger{
+        display: block;
+        position: fixed;
+        top:calc(76px / 2);
+        right:16px;
+        transform:translate(-50%, -66%);
+        z-index: 10;
+    }
+}
