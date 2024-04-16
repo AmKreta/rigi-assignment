@@ -21,7 +21,7 @@ const Feed: React.FC = function () {
   const ref = useRef<HTMLDivElement>(null);
 
   function loadMorePosts(isVisible:boolean){
-    if(isVisible && posts.pagination.page>1){
+    if(isVisible){
       dispatch(fetchPosts() as any);
     }
   }
