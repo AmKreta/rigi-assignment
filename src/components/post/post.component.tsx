@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Post as PostInterface } from "../../lib/types/types";
 import "./post.styles.scss";
 import formatDate from "../../lib/dateFormat/dateFormat";
 import ThemeContext from "../../lib/context/themeProvider";
 import { AttachmentType } from "../../lib/enum/attachmentType.enum";
+import AttachmentModal from "../attachmentModal/attachmentModal.component";
 
 interface props {
   post: PostInterface;
@@ -14,6 +15,8 @@ interface props {
 
 const Post: React.FC<props> = function ({ post, isLoading, onClick, index }) {
   const {mode} = useContext(ThemeContext);  
+  const [showAttachmentModal, setShowAttachmentModal] = useState(false);
+
   return (
     <div className={`${mode} post-container`}>
       <div className="author-profile-picture">
@@ -30,16 +33,16 @@ const Post: React.FC<props> = function ({ post, isLoading, onClick, index }) {
         <div className="post-content" onClick={onClick} data-id={post.id} data-index={index}>{post.text}</div>
         {
             post.attachments.length
-                ?<div className={`post-attachment-container num-attachment-${post.attachments.length>=3?3:post.attachments.length}`}>
+                ?<div className={`post-attachment-container num-attachment-${post.attachments.length>=3?3:post.attachments.length}`} onClick={()=>setShowAttachmentModal(true)}>
                     {
                         post
                             .attachments
                             .slice(0,3)
-                            .map((attachment, index)=><div key={attachment.id} className={`post-attachment post-attachment-${index}`}>
+                            .map((attachment, attachmentIndex)=><div key={attachment.id} className={`post-attachment post-attachment-${attachmentIndex}`}>
                                 {
                                     attachment.type===AttachmentType.IMAGE
-                                        ? <img src={attachment.url} loading="lazy" alt='post-attachment'/>
-                                        : <video src={attachment.url} controls preload="metadata"/>
+                                        ? <img data-post-index={index} src={attachment.url} loading="lazy" alt='post-attachment'/>
+                                        : <video data-post-index={index} src={attachment.url} controls preload="metadata"/>
                                 }
                             </div>)
                     }
@@ -47,6 +50,11 @@ const Post: React.FC<props> = function ({ post, isLoading, onClick, index }) {
             :null
         }
       </div>
+      {
+        showAttachmentModal
+          ?<AttachmentModal attachments={post.attachments} onOverlayClick={()=>setShowAttachmentModal(false)}/>
+          :null
+      }
     </div>
   );
 };

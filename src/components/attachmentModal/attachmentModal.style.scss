@@ -1,0 +1,32 @@
+.attachment-child-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: min(100vw, 800px);
+    z-index:2;
+}
+
+.modal-icon:hover{
+    cursor: pointer;
+}
+
+.disabled{
+    opacity: .3;
+}
+
+.attachment-modal-media-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    overflow: hidden;
+
+    img{
+        width: 100%;
+    }
+
+    video{
+        width: 100%;
+    }
+}
