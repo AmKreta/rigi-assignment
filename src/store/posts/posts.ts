@@ -14,6 +14,7 @@ interface PostSliceInterface {
       limit:number;
     };
   };
+  filter:string;
 }
 
 const initialState: PostSliceInterface = {
@@ -24,6 +25,7 @@ const initialState: PostSliceInterface = {
     data: [],
     pagination: { hasMore: true, page:1, limit:10},
   },
+  filter:''
 };
 
 export const fetchPosts = createAsyncThunk("Posts/fetchPosts", async (_, thunkApi:any) => {
@@ -51,6 +53,9 @@ const PostSlice = createSlice({
     },
     resetActivePost(state){
       state.activePost = null;
+    },
+    setFilter(state, action:PayloadAction<string>){
+      state.filter = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -73,5 +78,5 @@ const PostSlice = createSlice({
   },
 });
 
-export const {setActivePost, resetActivePost} = PostSlice.actions;
+export const {setActivePost, resetActivePost, setFilter} = PostSlice.actions;
 export default PostSlice.reducer;

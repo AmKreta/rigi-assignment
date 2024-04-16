@@ -7,10 +7,12 @@ import ThemeContext from "../../lib/context/themeProvider";
 import FriendListComponent from "../../components/friend-list/friendList.component";
 import { useNavigate } from "react-router-dom";
 import { setActivePost } from "../../store/posts/posts";
+import { Post as PostInterface } from "../../lib/types/types";
 
 const Feed: React.FC = function () {
   const {mode} = useContext(ThemeContext);
   const posts = useSelector((state:RootState)=>state.post.list);
+  const filter = useSelector((state:RootState)=>state.post.filter);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>(null);
@@ -46,7 +48,15 @@ const Feed: React.FC = function () {
   }
 
   return <div className={`${mode} feed-container`} ref={ref}>
-        {posts.data.map((post:any, index:number)=><Post post={post} key={post.id} onClick={navigaeToPost} index={index}/>)}
+        {posts
+          .data
+          .filter((post:PostInterface)=>filter ? post.text.toLocaleLowerCase().includes(filter) : true)
+          .map((post:any, index:number)=><Post 
+            post={post} 
+            key={post.id} 
+            onClick={navigaeToPost} 
+            index={index}
+          />)}
         <FriendListComponent />
     </div>
 };
