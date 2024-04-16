@@ -14,7 +14,10 @@ idbOpenRequest.onupgradeneeded = (e) =>{
 }
 
 self.addEventListener('install',e=>{
-
+  e.waitUntil(async()=>{
+    const cache = await caches.open(STATIC_CACHE);
+    return cache.addAll([self.location.origin]);
+  })
 });
 
 self.addEventListener('fetch', (event) => {
@@ -32,7 +35,46 @@ self.addEventListener('fetch', (event) => {
       ?saveToCache(event)
       :readFromCache(event);
   }
+  else {
+    return appFiles(event)
+  };
 });
+
+async function appFiles(event){
+  if(navigator.onLine){
+    const fetchRequest = event.request.clone();
+    event.respondWith(
+      fetch(fetchRequest)
+        .then(async response=>{
+          if(response.url.includes(self.location.origin)){
+            const responseToCache = response.clone();
+            caches
+              .open(STATIC_CACHE)
+              .then(cache=>cache.add(fetchRequest, responseToCache))
+              .catch(err=>{
+                console.log(err);
+              })
+          }
+          return response;
+        })
+        .catch(err=>{
+          console.log(err);
+          return err;
+        })
+    );
+  }
+  else{
+    event.respondWith(
+      caches
+        .match(event.request)
+        .then(cache=>cache)
+        .catch(err=>{
+          console.log(err);
+          return err;
+        })
+    );
+  }
+}
 
 
 function readDataFromPost(page, limit){
@@ -95,7 +137,7 @@ function saveToCache(event){
       caches
         .open(STATIC_CACHE)
         .then((cache) => {
-          cache.put(request, responseToCache);
+          cache.put(fetchRequest, responseToCache);
         });
       return response;
   }));
