@@ -70,15 +70,16 @@ const PostSlice = createSlice({
       if(Array.isArray(action.payload)){
         state.list.data = [...state.list.data, ...action.payload];
         if(!action.payload.length){
-          state.list.pagination.hasMore = false;
+          state.list.pagination = {...initialState.list.pagination, hasMore:false}
         }
         else{
+          state.list.pagination = {...initialState.list.pagination, hasMore:false}
           state.list.pagination.page++;
         }
       }
       else{
         state.list.data = [...state.list.data, ...action.payload!.data];
-        state.list.pagination = action.payload!.pagination;
+        state.list.pagination = {...state.list.pagination, ...action.payload!.pagination};
       }
     });
     builder.addCase(fetchPosts.rejected, (state, action) => {
