@@ -14,9 +14,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(function(){
-   dispatch(fetchUsers() as any);
-   dispatch(fetchPosts() as any);
+    dispatch(fetchUsers() as any);
+    dispatch(fetchPosts() as any);
+  },[dispatch]);
 
+  useEffect(function(){
    if(activeTheme === ThemeMode.SYSTEM){
       if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
         setActiveTheme(ThemeMode.DARK);
@@ -25,7 +27,7 @@ function App() {
       }
    }
 
-  },[dispatch, activeTheme]);
+  },[activeTheme]);
 
   if(activeTheme === ThemeMode.SYSTEM){
     //preventing initial creation of nodes and then changing theme

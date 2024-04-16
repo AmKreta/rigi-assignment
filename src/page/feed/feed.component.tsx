@@ -21,7 +21,7 @@ const Feed: React.FC = function () {
   const ref = useRef<HTMLDivElement>(null);
 
   function loadMorePosts(isVisible:boolean){
-    if(isVisible){
+    if(isVisible && posts.pagination.page>1){
       dispatch(fetchPosts() as any);
     }
   }
@@ -73,7 +73,7 @@ const Feed: React.FC = function () {
             index={index}
           />)}
           {
-            posts.pagination
+            posts.pagination.hasMore
               ? <IntersectionObserverComponent callback={loadMorePosts} options={{root:document.body}}>
                   {
                     (ref)=>(<div ref={ref as any}>
