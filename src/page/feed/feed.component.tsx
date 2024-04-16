@@ -6,10 +6,12 @@ import './feed.style.scss';
 import ThemeContext from "../../lib/context/themeProvider";
 import FriendListComponent from "../../components/friend-list/friendList.component";
 import { useNavigate } from "react-router-dom";
-import { setActivePost } from "../../store/posts/posts";
+import { fetchPosts, setActivePost } from "../../store/posts/posts";
 import { Post as PostInterface } from "../../lib/types/types";
 import Modal from "../../components/modal/modal.component";
 import Loader from "../../components/loader/loader.component";
+import useIntersectionObserver from "../../lib/hooks/useIntersectionObserver.hook";
+import IntersectionObserverComponent from "../../lib/intrsectionObserverComponent/intersectionObserver.component";
 
 const Feed: React.FC = function () {
   const {mode} = useContext(ThemeContext);
@@ -18,6 +20,12 @@ const Feed: React.FC = function () {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>(null);
+
+  function loadMorePosts(isVisible:boolean){
+    if(isVisible){
+      dispatch(fetchPosts() as any);
+    }
+  }
 
   useLayoutEffect(function(){
     const scrollPosition = localStorage.getItem('feed-scroll-position');
@@ -30,7 +38,7 @@ const Feed: React.FC = function () {
     }
   },[]);
 
-  if(posts.loading){
+  if(posts.loading && !posts.data.length){
     return <Modal>
       <Loader height={60} width={60}/>
     </Modal>
@@ -65,6 +73,13 @@ const Feed: React.FC = function () {
             onClick={navigaeToPost} 
             index={index}
           />)}
+        <IntersectionObserverComponent callback={loadMorePosts} options={{root:document.body}}>
+          {
+            (ref)=>(<div ref={ref as any}>
+              <Loader height={40} width={40}/>
+            </div>)
+          }
+        </IntersectionObserverComponent>
         <FriendListComponent />
     </div>
 };

@@ -29,10 +29,10 @@ const initialState: PostSliceInterface = {
 };
 
 export const fetchPosts = createAsyncThunk("Posts/fetchPosts", async (_, thunkApi:any) => {
-    const postList = thunkApi.getState().post.list;
-    if(postList.pagination.hasMore){
+    const post = thunkApi.getState().post;
+    if(post.list.pagination.hasMore && !post.list.loadng){
         let limit = 10;
-        let page = postList.pagination.page;
+        let page = post.list.pagination.page;
         const res = await PostApiService.getPosts(page,limit);
         return res.data;
     }
@@ -66,7 +66,7 @@ const PostSlice = createSlice({
       state.list.loading = false;
       if(action.payload){
         state.list.data = [...state.list.data, ...action.payload!.data];
-        state.list.pagination.page++;
+        state.list.pagination = action.payload!.pagination;
       }
     });
     builder.addCase(fetchPosts.rejected, (state, action) => {
