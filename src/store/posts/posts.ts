@@ -80,6 +80,7 @@ const PostSlice = createSlice({
       else{
         state.list.data = [...state.list.data, ...action.payload!.data];
         state.list.pagination = {...state.list.pagination, ...action.payload!.pagination};
+        state.list.pagination.page++;
       }
     });
     builder.addCase(fetchPosts.rejected, (state, action) => {
